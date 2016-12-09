@@ -11,6 +11,22 @@ var db = (process.env.MONGOLAB_URL || 'mongodb://localhost/ambits');
 mongoose.connect(db);
 var Location = require('./locations/locationSchema');
 
+//set up webpack features
+if (process.env.NODE_ENV !== 'production') {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const config = require('../webpack-deployment.config.js');
+  const compiler = webpack(config);
+
+  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPathdist,
+    stats: {colors: true}
+  }));
+}
+
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname  +'/../client'));
