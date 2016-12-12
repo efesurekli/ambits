@@ -12,6 +12,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import Login from './login/login.jsx';
+import CheckinContainer from './checkin/components/checkinContainer.jsx';
 
 const styles = {
   container: {
@@ -34,8 +35,9 @@ class Main extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <AppBar title='Ambitually'></AppBar>
-          <Login startsOpen={true} />
+        <AppBar title='Ambitually'></AppBar>
+        <CheckinContainer/>
+        <Login startsOpen={false} />
         </div>
       </MuiThemeProvider>
     );
